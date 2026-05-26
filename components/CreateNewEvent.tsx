@@ -10,7 +10,7 @@ const eventSchema = z.object({
 
   shortDescription: z
     .string()
-    .min(10, "Short description is too short"),
+    .min(10, "Short description must be at least 10 characters"),
 
   image: z.string().url("Enter a valid image URL"),
 
