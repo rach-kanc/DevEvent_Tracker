@@ -114,10 +114,11 @@ const buttonStyles = `
         <h2 className="text-2xl font-bold">Basic Info</h2>
 
         <div>
-          <label className="block mb-2">Event Title</label>
+          <label htmlFor="title-input" className="block mb-2">Event Title</label>
 
           <input
             type="text"
+            id="title-input"
             placeholder="Global AI Hackathon 2024"
             {...register("title")}
             className={inputStyles}/>
@@ -130,10 +131,11 @@ const buttonStyles = `
         </div>
 
         <div>
-          <label className="block mb-2">Short Description</label>
+          <label htmlFor="short-description-input" className="block mb-2">Short Description</label>
 
           <input
             type="text"
+            id="short-description-input"
             placeholder="A premier hackathon for developers worldwide."
             {...register("shortDescription")}
             className={inputStyles}/>
@@ -146,10 +148,11 @@ const buttonStyles = `
         </div>
 
         <div>
-          <label className="block mb-2">Banner Image URL</label>
+          <label htmlFor="image-input" className="block mb-2">Banner Image URL</label>
 
           <input
             type="text"
+            id="image-input"
             placeholder="https://example.com/image.png"
             {...register("image")}
             className={inputStyles}/>
@@ -167,9 +170,10 @@ const buttonStyles = `
         <h2 className="text-2xl font-bold">Event Details</h2>
 
         <div>
-          <label className="block mb-2">Overview</label>
+          <label htmlFor="overview-input" className="block mb-2">Overview</label>
 
           <textarea
+            id="overview-input"
             rows={5}
             placeholder="Describe your event..."
             {...register("overview")}
@@ -184,10 +188,11 @@ const buttonStyles = `
 
         <div className="grid md:grid-cols-2 gap-5">
           <div>
-            <label className="block mb-2">Date</label>
+            <label htmlFor="date-input" className="block mb-2">Date</label>
 
             <input
               type="date"
+              id="date-input"
               {...register("date")}
             className={inputStyles}/>
 
@@ -199,10 +204,11 @@ const buttonStyles = `
           </div>
 
           <div>
-            <label className="block mb-2">Time</label>
+            <label htmlFor="time-input" className="block mb-2">Time</label>
 
             <input
               type="time"
+              id="time-input"
               {...register("time")}
               className={inputStyles}/>
 
@@ -217,10 +223,11 @@ const buttonStyles = `
         </div>
 
         <div>
-          <label className="block mb-2">Location</label>
+          <label htmlFor="location-input" className="block mb-2">Location</label>
 
           <input
             type="text"
+            id="location-input"
             placeholder="Bangalore, India"
             {...register("location")}
             className={inputStyles}/>
@@ -233,9 +240,10 @@ const buttonStyles = `
         </div>
 
         <div>
-          <label className="block mb-2">Mode</label>
+          <label htmlFor="mode-select" className="block mb-2">Mode</label>
 
           <select
+                id="mode-select"
                 {...register("mode")}
                 className={selectStyles}>
             <option value="" className="bg-[#071018] text-gray-400">
@@ -260,10 +268,11 @@ const buttonStyles = `
         <h2 className="text-2xl font-bold">Audience & Agenda</h2>
 
         <div>
-          <label className="block mb-2">Target Audience</label>
+          <label htmlFor="target-audience-input" className="block mb-2">Target Audience</label>
 
           <input
             type="text"
+            id="target-audience-input"
             placeholder="Developers, AI Researchers..."
             {...register("targetAudience")}
             className={inputStyles}/>
@@ -276,10 +285,11 @@ const buttonStyles = `
         </div>
 
         <div>
-          <label className="block mb-2">Agenda</label>
+          <label htmlFor="agenda-input" className="block mb-2">Agenda</label>
 
           <textarea
             rows={6}
+            id="agenda-input"
             placeholder="09:00 - Keynote..."
             {...register("agenda")}
             className={`${inputStyles} resize-none`}/>
@@ -297,10 +307,11 @@ const buttonStyles = `
         <h2 className="text-2xl font-bold">Organizer</h2>
 
         <div>
-          <label className="block mb-2">Organizer Name</label>
+          <label htmlFor="organizer-input" className="block mb-2">Organizer Name</label>
 
           <input
             type="text"
+            id="organizer-input"
             placeholder="Google Cloud"
             {...register("organizer")}
             className={inputStyles}/>
@@ -313,10 +324,11 @@ const buttonStyles = `
         </div>
 
         <div>
-  <label className="block mb-2">Tags</label>
+  <label htmlFor="tags-input" className="block mb-2">Tags</label>
 
   <input
     type="text"
+    id="tags-input"
     placeholder="AI, Cloud, DevOps"
     {...register("tags")}
     className={inputStyles}/>
