@@ -3,6 +3,7 @@ import EventCard from "@/components/EventCard";
 import { IEvent } from "@/database";
 import { cacheLife } from "next/cache";
 import { getAllEvents } from "@/lib/actions/event.actions";
+import Footer from "@/components/Footer";
 
 const Page = async () => {
   'use cache';
@@ -27,6 +28,7 @@ const Page = async () => {
           ))}
         </ul>
       </div>
+      <Footer />
     </section>
   )
 }
