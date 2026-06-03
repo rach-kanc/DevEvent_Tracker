@@ -15,6 +15,7 @@ export interface IEvent {
     date: string;
     time: string;
     mode: "online" | "offline" | "hybrid";
+    type: "hackathon" | "conference" | "workshop" | "meetup";
     audience: string;
     agenda: string[];
     organizer: string;
@@ -140,6 +141,12 @@ const EventSchema = new Schema<IEvent>(
             type: String,
             enum: ["online", "offline", "hybrid"],
             required: [true, "Mode is required"],
+            trim: true,
+        },
+        type: {
+            type: String,
+            enum: ["hackathon", "conference", "workshop", "meetup"],
+            required: [true, "Event type is required"],
             trim: true,
         },
         audience: {
