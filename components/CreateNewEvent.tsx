@@ -128,6 +128,7 @@ const buttonStyles = `
 
       {/* BASIC INFO */}
       <div className={sectionStyles}>
+        {/* Closing div for Audience & Agenda */}
         <h2 className="text-2xl font-bold">Basic Info</h2>
 
         <div>
@@ -183,8 +184,8 @@ const buttonStyles = `
       </div>
 
       {/* EVENT DETAILS */}
-      <div></div> className={sectionStyles}
-        <h2 className="text-2xl font-bold">Event Details</h2>
+<div className={sectionStyles}>
+  <h2 className="text-2xl font-bold">Event Details</h2>
 
         <div>
           <label htmlFor="overview-input" className="block mb-2">Overview</label>
@@ -300,9 +301,12 @@ const buttonStyles = `
     </p>
   )}
 </div>
-
+</div>
       {/* AUDIENCE & AGENDA */}
       <div className={sectionStyles}>
+      {/* Closing div for Audience & Agenda */}
+      </div>
+      {/* Closing div for Audience & Agenda */}
         <h2 className="text-2xl font-bold">Audience & Agenda</h2>
 
         <div>
@@ -387,8 +391,9 @@ const buttonStyles = `
           Create Event
         </button>
       </div>
-    </div> {/* Closing div for Audience & Agenda */}
+    
     </form>
     );
   };
+     
 export default CreateEventForm;
