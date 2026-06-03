@@ -26,6 +26,7 @@ const eventSchema = z.object({
   location: z.string().min(2, "Location is required"),
 
   mode: z.string().min(1, "Select event mode"),
+  eventType: z.string().min(1, "Select event type"),
 
   targetAudience: z
     .string()
@@ -182,7 +183,7 @@ const buttonStyles = `
       </div>
 
       {/* EVENT DETAILS */}
-      <div className={sectionStyles}>
+      <div></div> className={sectionStyles}
         <h2 className="text-2xl font-bold">Event Details</h2>
 
         <div>
@@ -276,8 +277,29 @@ const buttonStyles = `
               {errors.mode.message}
             </p>
           )}
-        </div>
-      </div>
+          <div>
+  <label htmlFor="event-type-select" className="block mb-2">
+    Event Type
+  </label>
+
+  <select
+    id="event-type-select"
+    {...register("eventType")}
+    className={selectStyles}
+  >
+    <option value="">Select Type</option>
+    <option value="hackathon">Hackathon</option>
+    <option value="conference">Conference</option>
+    <option value="workshop">Workshop</option>
+    <option value="meetup">Meetup</option>
+  </select>
+
+  {errors.eventType && (
+    <p className="text-red-400 text-sm mt-2">
+      {errors.eventType.message}
+    </p>
+  )}
+</div>
 
       {/* AUDIENCE & AGENDA */}
       <div className={sectionStyles}>
@@ -316,7 +338,7 @@ const buttonStyles = `
             </p>
           )}
         </div>
-      </div>
+      </div> {/* Closing div for Organizer */}
 
       {/* ORGANIZER */}
       <div className={sectionStyles}>
@@ -358,17 +380,15 @@ const buttonStyles = `
       </div>
 
       {/* SUBMIT BUTTON */}
-<div className="flex justify-center">
-
-  <button
-        type="submit"
-        className={buttonStyles}>
-        Create Event
-      </button>
+      <div className="flex justify-center">
+        <button
+          type="submit"
+          className={buttonStyles}>
+          Create Event
+        </button>
       </div>
+    </div> {/* Closing div for Audience & Agenda */}
     </form>
-    
-  );
-};
-
+    );
+  };
 export default CreateEventForm;
