@@ -26,7 +26,7 @@ const eventSchema = z.object({
   location: z.string().min(2, "Location is required"),
 
   mode: z.string().min(1, "Select event mode"),
-  eventType: z.string().min(1, "Select event type"),
+  type: z.string().min(1, "Select event type"),
 
   targetAudience: z
     .string()
@@ -285,7 +285,7 @@ const buttonStyles = `
 
   <select
     id="event-type-select"
-    {...register("eventType")}
+    {...register("type")}
     className={selectStyles}
   >
     <option value="">Select Type</option>
@@ -295,9 +295,9 @@ const buttonStyles = `
     <option value="meetup">Meetup</option>
   </select>
 
-  {errors.eventType && (
+  {errors.type && (
     <p className="text-red-400 text-sm mt-2">
-      {errors.eventType.message}
+      {errors.type.message}
     </p>
   )}
 </div>
