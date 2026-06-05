@@ -13,6 +13,7 @@ type CreateEventInput = {
   time: string;
   location: string;
   mode: string;
+  eventType: string;     
   targetAudience: string;
   agenda: string;
   organizer: string;
@@ -35,9 +36,9 @@ export async function createEvent(data: CreateEventInput)  {
       date: data.date,
       time: data.time,
       mode: data.mode,
-
+      type: data.eventType,   
       audience: data.targetAudience,
-
+     
       agenda: data.agenda
         .split("\n")
         .map((item: string) => item.trim())
