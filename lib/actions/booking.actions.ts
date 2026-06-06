@@ -62,9 +62,8 @@ export async function getBookingsCountByEventId(eventId: string) {
 // Add these function blocks to the very bottom of booking.actions.ts
 export async function getBookingsByEmail(email: string) {
   try {
-    // Ensure database connection helper is invoked if required by the file
-    // await connectToDatabase();
-    
+    await connectToDatabase();
+
     // Clean string formats to match registry criteria
     const cleanEmail = email.toLowerCase().trim();
     
@@ -82,7 +81,8 @@ export async function getBookingsByEmail(email: string) {
 
 export async function deleteBooking(bookingId: string) {
   try {
-    // Invoke deletion protocol directly via Mongoose model identifier references
+    await connectToDatabase();
+
     const result = await Booking.findByIdAndDelete(bookingId);
     if (!result) {
       return { success: false, error: 'Booking registration record not found.' };
