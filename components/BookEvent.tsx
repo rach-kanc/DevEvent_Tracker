@@ -1,6 +1,8 @@
 'use client';
 
 import {useState} from "react";
+const [error, setError] = useState<string | null>(null);
+const [isSubmitting, setIsSubmitting] = useState(false);
 import {createBooking} from "@/lib/actions/booking.actions";
 import posthog from "posthog-js";
 
@@ -9,40 +11,52 @@ const BookEvent = ({ eventId, slug }: { eventId: string, slug: string;}) => {
     const [submitted, setSubmitted] = useState(false);
 
     const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
+  e.preventDefault();
+  setIsSubmitting(true);
+  setError(null);
 
-        const { success } = await createBooking({ eventId, slug, email });
+  try {
+    const response = await createBooking({ eventId, slug, email });
 
-        if(success) {
-            setSubmitted(true);
-            posthog.capture('event_booked', { eventId, slug, email })
-        } else {
-            console.error('Booking creation failed')
-            posthog.captureException('Booking creation failed')
-        }
+    if (response.success) {
+      setSubmitted(true);
+      posthog.capture('event_booked', { eventId, slug, email });
+    } else {
+      setError(response.error || "An unexpected error occurred. Please try again.");
+      posthog.captureException('Booking creation failed');
     }
+  } catch (err) {
+    setError("A network error occurred. Please try again.");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
     return (
         <div id="book-event">
-            {submitted ? (
-                <p className="text-sm">Thank you for signing up!</p>
-            ): (
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor="email">Email Address</label>
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            id="email"
-                            placeholder="Enter your email address"
-                        />
-                    </div>
+    {submitted ? (
+        <p className="text-sm">Thank you for signing up!</p>
+    ) : (
+        <form onSubmit={handleSubmit}>
+            <div>
+                <label htmlFor="email">Email Address</label>
+                <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    id="email"
+                    placeholder="Enter your email address"
+                    disabled={isSubmitting} // 1. Freeze input when submitting
+                />
+                {/* 2. Show the red error message under the input if an error occurs */}
+                {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
+            </div>
 
-                    <button type="submit" className="button-submit">Submit</button>
-                </form>
-            )}
-        </div>
-    )
-}
-export default BookEvent
+            {/* 3. Disable the button and change text dynamically */}
+            <button type="submit" className="button-submit" disabled={isSubmitting}>
+                {isSubmitting ? "Submitting..." : "Submit"}
+            </button>
+        </form>
+    )}
+</div>
