@@ -3,18 +3,13 @@ import { Event } from "@/database";
 
 const escapeRegex = (text: string) => text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
 
-export async function getAllEvents(filters?: { query?: string; mode?: string; tag?: string }) {
+export async function getAllEvents(filters?: { query?: string; mode?: string; tag?: string }, page = 1, limit = 50) {
   try {
     await connectToDatabase();
     const queryCondition: any = {};
 
     if (filters?.query) {
-      const safeQuery = escapeRegex(filters.query);
-      queryCondition.$or = [
-        { title: { $regex: safeQuery, $options: 'i' } },
-        { description: { $regex: safeQuery, $options: 'i' } },
-        { tags: { $regex: safeQuery, $options: 'i' } }
-      ];
+      queryCondition.$text = { $search: filters.query };
     }
 
     if (filters?.mode && filters.mode !== 'All') {
@@ -27,7 +22,16 @@ export async function getAllEvents(filters?: { query?: string; mode?: string; ta
       queryCondition.tags = { $regex: new RegExp(`^${safeTag}$`, 'i') };
     }
 
-    const events = await Event.find(queryCondition).sort({ createdAt: -1 });
+    let query = Event.find(queryCondition);
+
+    if (filters?.query) {
+        query = query.select({ score: { $meta: 'textScore' } }).sort({ score: { $meta: 'textScore' } });
+    } else {
+        query = query.sort({ createdAt: -1 });
+    }
+
+    const skip = (page - 1) * limit;
+    const events = await query.skip(skip).limit(limit);
     return JSON.parse(JSON.stringify(events));
 
   } catch (error) {

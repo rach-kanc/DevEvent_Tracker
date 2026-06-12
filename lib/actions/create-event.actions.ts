@@ -13,7 +13,6 @@ type CreateEventInput = {
   time: string;
   location: string;
   mode: string;
-  eventType: string;     
   type: string;
   targetAudience: string;
   agenda: string;
@@ -37,7 +36,6 @@ export async function createEvent(data: CreateEventInput)  {
       date: data.date,
       time: data.time,
       mode: data.mode,
-      type: data.eventType,   
       type: data.type,
 
       audience: data.targetAudience,

@@ -60,3 +60,5 @@ return (
         </div>
     );
 };
+
+export default BookEvent;
